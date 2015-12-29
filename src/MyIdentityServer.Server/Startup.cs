@@ -48,27 +48,24 @@ namespace MyIdentityServer.Server
                 });
             });
 
-            app.Map("/id", adminApp =>
+            var factory = new IdentityServerServiceFactory();
+
+            factory.RegisterConfigurationServices(efConfig);
+            factory.RegisterOperationalServices(efConfig);
+
+            //factory.UseInMemoryUsers(Users.Get());            
+            //TODO: enable EF users
+            factory.ConfigureUserService();
+
+            var options = new IdentityServerOptions
             {
-                var factory = new IdentityServerServiceFactory();
+                SiteName = "MyIdentityServer - Server",
+                Factory = factory,
+                RequireSsl = false,
+                SigningCertificate = Certificate.Get(),
+            };
 
-                factory.RegisterConfigurationServices(efConfig);
-                factory.RegisterOperationalServices(efConfig);
-
-                //factory.UseInMemoryUsers(Users.Get());            
-                //TODO: enable EF users
-                factory.ConfigureUserService();
-
-                var options = new IdentityServerOptions
-                {
-                    SiteName = "MyIdentityServer - Server",
-                    Factory = factory,
-                    RequireSsl = false,
-                    SigningCertificate = Certificate.Get(),
-                };
-
-                app.UseIdentityServer(options);
-            });
+            app.UseIdentityServer(options);
 
             var cleanup = new TokenCleanup(efConfig, 10);
             cleanup.Start();
