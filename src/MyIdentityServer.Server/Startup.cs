@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Cookies;
 using MyIdentityServer.Server;
 using MyIdentityServer.Server.Services;
 using System.Linq;
+using IdentityManager.Configuration;
 using IdentityServer3.Core.Models;
 using MyIdentityServer.Server.Temp;
 using Owin;
@@ -26,14 +27,7 @@ namespace MyIdentityServer.Server
                 .MinimumLevel.Debug()
                 .WriteTo.Trace()
                 .CreateLogger();
-
-            // Configure the db context, user manager and signin manager to use a single instance per request
-            //app.CreatePerOwinContext(ApplicationDbContext.Create);
-            //app.CreatePerOwinContext<ApplicationUserManager>(CreateUserManager);
-            //app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
-
-            //********** IDENTITY SERVER SETUP *************************
-
+            
             var efConfig = new EntityFrameworkServiceOptions
             {
                 ConnectionString = "DefaultConnection"
@@ -43,24 +37,39 @@ namespace MyIdentityServer.Server
             ConfigureClients(Clients.Get(), efConfig);
             ConfigureScopes(Scopes.Get(), efConfig);
 
-            var factory = new IdentityServerServiceFactory();
-
-            factory.RegisterConfigurationServices(efConfig);
-            factory.RegisterOperationalServices(efConfig);
-
-            //factory.UseInMemoryUsers(Users.Get());            
-            //TODO: enable EF users
-            factory.ConfigureUserService();
-
-            var options = new IdentityServerOptions
+            app.Map("/admin", adminApp =>
             {
-                SiteName = "MyIdentityServer - Server",
-                Factory = factory,
-                RequireSsl = false,
-                SigningCertificate = Certificate.Get(),
-            };
+                var imgrFactory = new IdentityManagerServiceFactory();
+                imgrFactory.ConfigureSimpleIdentityManagerService();
+                //factory.ConfigureCustomIdentityManagerServiceWithIntKeys("AspId_CustomPK");
 
-            app.UseIdentityServer(options);
+                adminApp.UseIdentityManager(new IdentityManagerOptions()
+                {
+                    Factory = imgrFactory
+                });
+            });
+
+            app.Map("/id", adminApp =>
+            {
+                var factory = new IdentityServerServiceFactory();
+
+                factory.RegisterConfigurationServices(efConfig);
+                factory.RegisterOperationalServices(efConfig);
+
+                //factory.UseInMemoryUsers(Users.Get());            
+                //TODO: enable EF users
+                factory.ConfigureUserService();
+
+                var options = new IdentityServerOptions
+                {
+                    SiteName = "MyIdentityServer - Server",
+                    Factory = factory,
+                    RequireSsl = false,
+                    SigningCertificate = Certificate.Get(),
+                };
+
+                app.UseIdentityServer(options);
+            });
 
             var cleanup = new TokenCleanup(efConfig, 10);
             cleanup.Start();
