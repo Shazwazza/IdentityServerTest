@@ -165,11 +165,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IdentityManagerServiceExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApplicationSignInManager.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\SmsService.cs" />
-    <Compile Include="SimpleIdentityManagerService.cs" />
+    <Compile Include="ApplicationIdentityManagerService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Temp\Certificate.cs" />
     <Compile Include="Temp\Clients.cs" />

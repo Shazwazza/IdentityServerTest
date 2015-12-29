@@ -41,11 +41,10 @@ namespace MyIdentityServer.Server
             {
                 var imgrFactory = new IdentityManagerServiceFactory();
                 imgrFactory.ConfigureSimpleIdentityManagerService();
-                //factory.ConfigureCustomIdentityManagerServiceWithIntKeys("AspId_CustomPK");
 
                 adminApp.UseIdentityManager(new IdentityManagerOptions()
                 {
-                    Factory = imgrFactory
+                    Factory = imgrFactory                    
                 });
             });
 
