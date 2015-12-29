@@ -27,7 +27,17 @@ namespace MyIdentityServer.Server.Temp
                     Type = ScopeType.Resource,
                     Emphasize = true,
                 },
-             };
+                new Scope
+                {
+                    Enabled = true,
+                    Name = "roles",
+                    Type = ScopeType.Identity,
+                    Claims = new List<ScopeClaim>
+                    {
+                        new ScopeClaim("role")
+                    }
+                }
+            };
         }
     }
 }

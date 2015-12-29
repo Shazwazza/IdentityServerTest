@@ -54,7 +54,7 @@ namespace MyIdentityServer
                 RedirectUri = "https://localhost:44300/",
                 ResponseType = "id_token",
                 SignInAsAuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                //Scope = "open_id profile"
+                Scope = "openid profile roles"
             });
 
             //app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
