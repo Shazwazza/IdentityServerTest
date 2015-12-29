@@ -1,16 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.IdentityModel.Tokens;
-using System.Security.Claims;
 using System.Web.Helpers;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using IdentityServer3.Core;
-using MyIdentityServer.Core;
 
-namespace MyIdentityServer
+namespace MyIdentityServer.Website
 {
     public class MvcApplication : System.Web.HttpApplication
     {

@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using IdentityModel.Client;
 using Microsoft.AspNet.Identity;
-using Microsoft.IdentityModel.Protocols;
-using Microsoft.Owin;
-using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
 using MyIdentityServer.Core;
 using Owin;
-using Constants = IdentityServer3.Core.Constants;
 
 
-namespace MyIdentityServer
+namespace MyIdentityServer.Website
 {
     //public static class Constants
     //{

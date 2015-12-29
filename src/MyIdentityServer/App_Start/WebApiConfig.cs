@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace MyIdentityServer
+namespace MyIdentityServer.Website
 {
     public static class WebApiConfig
     {

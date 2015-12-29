@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyIdentityServer", "MyIdentityServer\MyIdentityServer.csproj", "{FA1FF238-0B71-42E8-B5AC-74C5653BD442}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyIdentityServer.Website", "MyIdentityServer\MyIdentityServer.Website.csproj", "{FA1FF238-0B71-42E8-B5AC-74C5653BD442}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyIdentityServer.Tests", "MyIdentityServer.Tests\MyIdentityServer.Tests.csproj", "{FB9548C4-EDE6-4F4A-BCAF-6090C97218CC}"
 EndProject

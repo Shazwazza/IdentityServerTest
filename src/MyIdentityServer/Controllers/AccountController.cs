@@ -1,17 +1,10 @@
-﻿using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
-using MyIdentityServer.Core;
-using MyIdentityServer.Core.Models;
-using MyIdentityServer.Models;
 
-namespace MyIdentityServer.Controllers
+namespace MyIdentityServer.Website.Controllers
 {
     [Authorize]
     public class AccountController : Controller

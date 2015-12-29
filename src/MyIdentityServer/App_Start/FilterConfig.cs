@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace MyIdentityServer
+namespace MyIdentityServer.Website
 {
     public class FilterConfig
     {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Owin;
-using MyIdentityServer;
+using MyIdentityServer.Website;
 using Owin;
 
 [assembly: OwinStartup(typeof(Startup))]
-namespace MyIdentityServer
+namespace MyIdentityServer.Website
 {
     public partial class Startup
     {

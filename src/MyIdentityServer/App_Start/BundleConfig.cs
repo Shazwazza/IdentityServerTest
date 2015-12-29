@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace MyIdentityServer
+namespace MyIdentityServer.Website
 {
     public class BundleConfig
     {
