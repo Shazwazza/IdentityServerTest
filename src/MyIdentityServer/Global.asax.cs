@@ -1,9 +1,14 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Web.Helpers;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using IdentityServer3.Core;
+using MyIdentityServer.Core;
 
 namespace MyIdentityServer
 {
@@ -11,8 +16,10 @@ namespace MyIdentityServer
     {
         protected void Application_Start()
         {
-            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
-
+            //Filters out the long claim names (see: https://identityserver.github.io/Documentation/docsv2/overview/mvcGettingStarted.html)
+            AntiForgeryConfig.UniqueClaimTypeIdentifier = Constants.ClaimTypes.Subject;
+            JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
+            
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

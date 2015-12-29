@@ -28,7 +28,7 @@ using Constants = IdentityServer3.Core.Constants;
 
 namespace MyIdentityServer.Core
 {
-    public class AspNetIdentityUserService<TUser, TKey> : UserServiceBase
+    public abstract class AspNetIdentityUserService<TUser, TKey> : UserServiceBase
         where TUser : class, Microsoft.AspNet.Identity.IUser<TKey>, new()
         where TKey : IEquatable<TKey>
     {

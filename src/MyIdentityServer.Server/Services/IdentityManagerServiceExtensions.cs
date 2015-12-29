@@ -6,9 +6,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using MyIdentityServer.Core;
 using MyIdentityServer.Core.Models;
-using MyIdentityServer.Server.Services;
 
-namespace MyIdentityServer.Server
+namespace MyIdentityServer.Server.Services
 {
     public static class IdentityManagerServiceExtensions
     {

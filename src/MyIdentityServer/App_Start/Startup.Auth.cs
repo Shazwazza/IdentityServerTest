@@ -1,18 +1,17 @@
-﻿using IdentityModel.Client;
+﻿using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using IdentityModel.Client;
+using Microsoft.AspNet.Identity;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
-using Owin;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IdentityModel.Tokens;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
 using MyIdentityServer.Core;
+using Owin;
+using Constants = IdentityServer3.Core.Constants;
+
 
 namespace MyIdentityServer
 {
@@ -44,7 +43,7 @@ namespace MyIdentityServer
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie
+                AuthenticationType = CookieAuthenticationDefaults.AuthenticationType
             });
 
             app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
@@ -53,8 +52,42 @@ namespace MyIdentityServer
                 ClientId = "mvc",
                 RedirectUri = "https://localhost:44300/",
                 ResponseType = "id_token",
-                SignInAsAuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                Scope = "openid profile roles"
+                SignInAsAuthenticationType = CookieAuthenticationDefaults.AuthenticationType,
+                Scope = "openid profile roles",
+                Notifications = new OpenIdConnectAuthenticationNotifications
+                {
+                    SecurityTokenValidated = n =>
+                    {
+                        //Example of "claims transformation", as seen: https://identityserver.github.io/Documentation/docsv2/overview/mvcGettingStarted.html
+
+                        //var id = n.AuthenticationTicket.Identity;
+
+                        //// we want to keep first name, last name, subject and roles
+                        //var givenName = id.FindFirst(Constants.ClaimTypes.GivenName);
+                        //var familyName = id.FindFirst(Constants.ClaimTypes.FamilyName);
+                        //var sub = id.FindFirst(Constants.ClaimTypes.Subject);
+                        //var roles = id.FindAll(Constants.ClaimTypes.Role);
+
+                        //// create new identity and set name and role claim type
+                        //var nid = new ClaimsIdentity(
+                        //    id.AuthenticationType,
+                        //    Constants.ClaimTypes.GivenName,
+                        //    Constants.ClaimTypes.Role);
+
+                        //nid.AddClaim(givenName);
+                        //nid.AddClaim(familyName);
+                        //nid.AddClaim(sub);
+                        //nid.AddClaims(roles);
+
+                        //// add some other app specific claim
+                        //nid.AddClaim(new Claim("app_specific", "some data"));
+
+                        //n.AuthenticationTicket = new AuthenticationTicket(
+                        //    nid,
+                        //    n.AuthenticationTicket.Properties);
+                        return Task.FromResult(0);
+                    }
+                }
             });
 
             //app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions

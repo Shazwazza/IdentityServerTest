@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using IdentityServer3.Core;
 using IdentityServer3.Core.Models;
+using IdentityServer3.EntityFramework;
 
 namespace MyIdentityServer.Server.Temp
 {
-    public class Clients
+    public class TestClients
     {
         public static List<Client> Get()
         {
@@ -316,6 +318,22 @@ namespace MyIdentityServer.Server.Temp
                 //    RefreshTokenExpiration = TokenExpiration.Sliding
                 //}
             };
+        }
+
+        public static void ConfigureClients(IEnumerable<Client> clients, EntityFrameworkServiceOptions options)
+        {
+            using (var db = new ClientConfigurationDbContext(options.ConnectionString, options.Schema))
+            {
+                if (!db.Clients.Any())
+                {
+                    foreach (var c in clients)
+                    {
+                        var e = c.ToEntity();
+                        db.Clients.Add(e);
+                    }
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }

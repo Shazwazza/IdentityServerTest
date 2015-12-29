@@ -18,6 +18,7 @@ namespace MyIdentityServer.Server.Services
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
         {
+            base.CreateUserIdentityAsync(user);
             return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
         }
 

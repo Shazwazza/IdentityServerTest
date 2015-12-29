@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
 using MyIdentityServer.Core;
 using MyIdentityServer.Core.Models;
 using MyIdentityServer.Models;
@@ -397,7 +398,7 @@ namespace MyIdentityServer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            AuthenticationManager.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return RedirectToAction("Index", "Home");
         }
 
