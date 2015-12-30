@@ -194,3 +194,23 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+src/MyIdentityServer.Umbraco/App_Data/cache/*
+src/MyIdentityServer.Umbraco/App_Data/Logs/*
+src/MyIdentityServer.Umbraco/App_Data/NuGetBackup/*
+src/MyIdentityServer.Umbraco/App_Data/TEMP/ClientDependency/*
+src/MyIdentityServer.Umbraco/App_Data/TEMP/ExamineIndexes/*
+src/MyIdentityServer.Umbraco/App_Data/TEMP/PluginCache/*
+src/MyIdentityServer.Umbraco/Views/*
+src/MyIdentityServer.Umbraco/umbraco_client/*
+src/MyIdentityServer.Umbraco/App_Plugins/*
+src/MyIdentityServer.Umbraco/App_Browsers/*
+src/MyIdentityServer.Umbraco/App_Data/TEMP/*
+src/MyIdentityServer.Umbraco/App_Data/umbraco.config
+src/MyIdentityServer.Umbraco/css/*
+src/MyIdentityServer.Umbraco/media/*
+src/MyIdentityServer.Umbraco/umbraco/*
+src/MyIdentityServer.Umbraco/Web.*
+src/MyIdentityServer.Umbraco/js/*
+src/MyIdentityServer.Umbraco/default.aspx
+src/MyIdentityServer.Umbraco/Global.asax
+src/MyIdentityServer.Umbraco/scripts/*

@@ -13,7 +13,7 @@ namespace MyIdentityServer.Server.Services
     {
         public static void ConfigureUserService(this IdentityServerServiceFactory factory)
         {
-            factory.UserService = new IdentityServer3.Core.Configuration.Registration<IUserService, UserService>();
+            factory.UserService = new IdentityServer3.Core.Configuration.Registration<IUserService, ApplicationUserService>();
             factory.Register(new IdentityServer3.Core.Configuration.Registration<ApplicationUserManager>(
                 resolver => ApplicationUserManager.CreateUserManager(
                     new IdentityFactoryOptions<ApplicationUserManager>(),

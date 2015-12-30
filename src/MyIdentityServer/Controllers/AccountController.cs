@@ -391,7 +391,12 @@ namespace MyIdentityServer.Website.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(CookieAuthenticationDefaults.AuthenticationType);
+            //NOTE: This will sign out of the current site
+            //AuthenticationManager.SignOut(CookieAuthenticationDefaults.AuthenticationType);
+
+            //NOTE: This will sign out of everything, current site and Identity server
+            AuthenticationManager.SignOut();
+
             return RedirectToAction("Index", "Home");
         }
 

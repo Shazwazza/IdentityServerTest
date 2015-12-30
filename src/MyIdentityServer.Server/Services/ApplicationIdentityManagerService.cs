@@ -32,7 +32,7 @@ namespace MyIdentityServer.Server.Services
             result.UserMetadata.CreateProperties = result.UserMetadata.CreateProperties
                 .Union(new[]
                 {
-                    PropertyMetadata.FromProperty<ApplicationUser>(x => x.Email, type: Constants.ClaimTypes.Email, required: true),
+                    PropertyMetadata.FromProperty<ApplicationUser>(x => x.Email, type: JwtClaimTypes.Email, required: true),
                     PropertyMetadata.FromProperty<ApplicationUser>(x => x.FirstName, type: JwtClaimTypes.GivenName, required: true),
                     PropertyMetadata.FromProperty<ApplicationUser>(x => x.LastName, type: JwtClaimTypes.FamilyName, required: true)
                 });

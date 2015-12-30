@@ -16,16 +16,51 @@ namespace MyIdentityServer.Server.Temp
                 new Client
                 {
                     Enabled = true,
-                    ClientName = "MVC Client",
-                    ClientId = "mvc",
+                    ClientName = "Portal",
+                    ClientId = "portal",
                     Flow = Flows.Implicit,
 
                     RedirectUris = new List<string>
                     {
                         "https://localhost:44300/"
                     },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        "https://localhost:44300/"
+                    },
 
-                    AllowAccessToAllScopes = true
+                    AllowedScopes = new List<string>
+                    {
+                        Constants.StandardScopes.OpenId,
+                        Constants.StandardScopes.Profile,
+                        Constants.StandardScopes.Email,
+                        Constants.StandardScopes.Roles
+                    }
+                },
+
+                new Client
+                {
+                    Enabled = true,
+                    ClientName = "Site-16927631-722A-4712-8175-E5B42C6FCB98",
+                    ClientId = "Site-16927631-722A-4712-8175-E5B42C6FCB98",
+                    Flow = Flows.Implicit,
+                    
+                    RedirectUris = new List<string>
+                    {
+                        "https://localhost:44302/"
+                    },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        "https://localhost:44302/"
+                    },
+
+                    AllowedScopes = new List<string>
+                    {
+                        Constants.StandardScopes.OpenId,
+                        Constants.StandardScopes.Profile,
+                        Constants.StandardScopes.Email,
+                        Constants.StandardScopes.Roles
+                    }
                 },
 
                 //new Client
