@@ -56,6 +56,16 @@ namespace MyIdentityServer.Server.Temp
                     {
                         new ScopeClaim("role")
                     }
+                },
+
+                //TODO: Verify that this is correct - Would we need a scope per site ?
+                new Scope
+                {
+                    Enabled = true,
+                    DisplayName = "Courier API",
+                    Name = "courierApi",
+                    Description = "Access to a courier API",
+                    Type = ScopeType.Resource
                 }
             };
         }

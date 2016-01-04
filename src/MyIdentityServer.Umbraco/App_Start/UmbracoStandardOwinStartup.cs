@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Helpers;
 using IdentityModel;
+using IdentityServer3.AccessTokenValidation;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
@@ -46,6 +47,9 @@ namespace MyIdentityServer.Umbraco
                 clientId: "Site-16927631-722A-4712-8175-E5B42C6FCB98",
                 signInAsAuthType: global::Umbraco.Core.Constants.Security.BackOfficeExternalAuthenticationType,
                 responseType: "id_token",
+                //ensure it's passive for Umbraco - because Umbraco has it's own auth system, we only want this to
+                //be enabled when it is specifically asked for.
+                authMode: AuthenticationMode.Passive,
                 securityTokenValidated: (notification, identity) =>
                 {
                     var id = notification.AuthenticationTicket.Identity;
@@ -73,7 +77,12 @@ namespace MyIdentityServer.Umbraco
             options.SetExternalSignInAutoLinkOptions(new ExternalSignInAutoLinkOptions(
                 autoLinkExternalAccount:true));
 
-            
+            //Enable token auth from Identity server
+            app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
+            {
+                Authority = "https://localhost:44301",
+                RequiredScopes = new[] { "sampleApi" }
+            });
 
             /* 
                  * Configure external logins for the back office:

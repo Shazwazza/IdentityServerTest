@@ -63,6 +63,23 @@ namespace MyIdentityServer.Server.Temp
                     }
                 },
 
+                new Client
+                {
+                    ClientName = "Courier-16927631-722A-4712-8175-E5B42C6FCB98",
+                    ClientId = "courier-16927631-722A-4712-8175-E5B42C6FCB98",
+                    Flow = Flows.ClientCredentials,
+
+                    ClientSecrets = new List<Secret>
+                    {
+                        //TODO: Change this of course!
+                        new Secret("secret".Sha256())
+                    },
+                    AllowedScopes = new List<string>
+                    {
+                        "courierApi"
+                    }
+                }
+
                 //new Client
                 //{
                 //    ClientName = "Code Flow Client Demo",

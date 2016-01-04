@@ -46,6 +46,8 @@ namespace MyIdentityServer.Website
                 redirectUri: "https://localhost:44300/",
                 clientId: "portal",
                 signInAsAuthType: CookieAuthenticationDefaults.AuthenticationType,
+                //Since this is the primary auth type for this website, this auth type is Active
+                authMode:AuthenticationMode.Active, 
                 responseType: "id_token");
 
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);

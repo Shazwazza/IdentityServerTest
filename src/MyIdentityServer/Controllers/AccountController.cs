@@ -1,6 +1,9 @@
-﻿using System.Security.Claims;
+﻿using System.Net.Http;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using IdentityModel.Client;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 
@@ -46,7 +49,38 @@ namespace MyIdentityServer.Website.Controllers
         //    }
         //}
 
-        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> GetServerData()
+        {
+            var token = await GetTokenAsync();
+
+            if (token.Error != null) throw new HttpException(token.Error);
+
+            using (var client = new HttpClient())
+            {
+                client.SetBearerToken(token.AccessToken);
+                using (var response = await client.GetAsync("https://localhost:44302/Umbraco/Api/MyApi/GetStuff"))
+                using (var content = response.Content)
+                {
+                    ViewBag.ServerDataStatus = response.StatusCode;
+                    ViewBag.ServerDataResult = await content.ReadAsStringAsync();
+                }
+            }
+            
+
+            return View("About", (User as ClaimsPrincipal).Claims);
+        }
+
+        private async Task<TokenResponse> GetTokenAsync()
+        {
+            var client = new TokenClient(
+                "https://localhost:44301/connect/token",
+                "courier-16927631-722A-4712-8175-E5B42C6FCB98",
+                "secret");
+
+            return await client.RequestClientCredentialsAsync("courierApi");
+        }
+
         public ActionResult About()
         {
             return View((User as ClaimsPrincipal).Claims);

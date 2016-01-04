@@ -3,6 +3,22 @@
     ViewBag.Title = "About";
 }
 
+<h2>Talk to other server</h2>
+@using (Html.BeginForm("GetServerData", "Account", FormMethod.Post))
+{
+    <button type="submit">Get it!</button>
+}
+
+@if (ViewBag.ServerDataStatus != null)
+{
+    <hr/>
+    <h5>Server data found:</h5>
+    <p><strong>Status: </strong>@ViewBag.ServerDataStatus</p>
+    <pre>@ViewBag.ServerDataResult</pre>
+    <hr/>
+}
+
+<h2>User Claims</h2>
 <dl>
     @foreach (var claim in Model)
     {

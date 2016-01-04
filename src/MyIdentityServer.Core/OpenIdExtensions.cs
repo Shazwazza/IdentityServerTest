@@ -22,6 +22,7 @@ namespace MyIdentityServer.Core
             string authority, string redirectUri, string clientId,
             string signInAsAuthType,
             string responseType,
+            AuthenticationMode authMode,
             Action<SecurityTokenValidatedNotification<OpenIdConnectMessage, OpenIdConnectAuthenticationOptions>, ClaimsIdentity> securityTokenValidated = null)
         {
             //TODO: Maybe not ideal that we put this logic here, but it is required for this provider to work...
@@ -33,6 +34,9 @@ namespace MyIdentityServer.Core
 
             var options = new OpenIdConnectAuthenticationOptions
             {
+                AuthenticationMode = authMode,
+
+
                 Caption = "My Identity Server",
                 AuthenticationType = "MyIdentityServer",
                 Authority = authority,
